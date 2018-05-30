@@ -18,14 +18,12 @@ export class GitService {
     try {
       this.getNpipData();
     } catch (e) {
-      debugger
+      // if there is an error we are at the end of the npip files
     }
   }
 
 
   async getNpipData():Promise<any>  {
-
-    debugger
 
     let url = this.buildNipUrl(this.npipCounter);
 
@@ -37,14 +35,13 @@ export class GitService {
 
       this._dataService.npips.push(this.convertMediawikiToMarkdown(e));
 
-      debugger
       try {
         this.getNpipData();
       } catch (e) {
-        debugger
+        // if there is an error we are at the end of the npip files
       }
     }).catch((r) => {
-      debugger
+
     });
 
   }
@@ -65,7 +62,8 @@ export class GitService {
   }
 
 
-
+  // thanks to https://github.com/philipashlock/mediawiki-to-markdown
+  // for the base function that i modified below
   convertMediawikiToMarkdown(wikiDataToConvert):string {
 
     // convert "==Heading 2==" to "# Heading 2" etc.
