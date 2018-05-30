@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import {GitService} from "./services/git/git.service";
 import {DataService} from "./services/data/data.service";
+import {NpipData} from "./services/data/npip.interface";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'app';
@@ -18,7 +19,7 @@ export class AppComponent {
   }
 
 
-  get npips(): string[] {
+  get npips(): NpipData[] {
     return this._dataService.npips;
   }
 

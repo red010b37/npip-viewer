@@ -1,15 +1,16 @@
 
 <mat-accordion>
-  <mat-expansion-panel *ngFor="let md of npips" >
+  <mat-expansion-panel *ngFor="let npip of npips" >
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Personal data
+        {{npip.name.toUpperCase()}}
+        [{{npip.status}}]
       </mat-panel-title>
       <mat-panel-description>
-        Type your name and age
+        {{npip.title}}
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <markdown [data]="md"></markdown>
+    <markdown [data]="npip.content"></markdown>
   </mat-expansion-panel>
 
 </mat-accordion>

@@ -1,4 +1,5 @@
 
+
 .mat-expansion-panel-header-title,
 .mat-expansion-panel-header-description {
   flex-basis: 0;
@@ -9,6 +10,8 @@
   align-items: center;
 }
 
-.mat-expansion-panel-body, pre {
-  background-color: #cccccc !important;
+body {
+  pre {
+    background-color: #cccccc !important;
+  }
 }

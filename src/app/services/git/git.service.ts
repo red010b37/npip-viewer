@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {DataService} from "../data/data.service";
+import {NpipData} from "../data/npip.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -27,16 +28,17 @@ export class GitService {
 
     let url = this.buildNipUrl(this.npipCounter);
 
-    this.npipCounter++;
-
     await this._httpClient.get(url,  {
       responseType: 'text',
     }).toPromise().then((e: string) => {
 
-      this._dataService.npips.push(this.convertMediawikiToMarkdown(e));
+      this._buildRespObj(e);
 
       try {
+
+        this.npipCounter++;
         this.getNpipData();
+
       } catch (e) {
         // if there is an error we are at the end of the npip files
       }
@@ -46,7 +48,7 @@ export class GitService {
 
   }
 
-  buildNipUrl(counter): string {
+  buildName(counter: number): string {
 
     let strCounter = counter.toString();
 
@@ -57,7 +59,59 @@ export class GitService {
     }
     let str = strZ.join('');
 
-    return `${environment.NpipUrl}npip-${str}.mediawiki`;
+    return `npip-${str}`;
+
+  }
+
+  buildNipUrl(counter): string {
+
+    let str = this.buildName(counter);
+
+    return `${environment.NpipUrl}${str}.mediawiki`;
+
+  }
+
+
+
+  private _buildRespObj(mediaWikiData: string) {
+
+    let nData: NpipData = {} as NpipData;
+
+    let linesArr: string[] = mediaWikiData.split('\n');
+
+    try {
+      linesArr.forEach((line) => {
+        if (line.toLowerCase().indexOf('title:') != -1) {
+          let titleS: string[] = line.split(":");
+          nData.title = titleS[1].trim();
+
+          throw {};
+        }
+
+      });
+    } catch (e) {
+
+    }
+
+
+    try {
+      linesArr.forEach((line) => {
+
+        if (line.toLowerCase().indexOf('status:') != -1) {
+          let s: string[] = line.split(":");
+
+          nData.status = s[1].trim();
+          throw {};
+        }
+
+      });
+    } catch (e) {
+
+    }
+
+    nData.name = this.buildName(this.npipCounter);
+    nData.content = this.convertMediawikiToMarkdown(mediaWikiData);
+    this._dataService.npips.push(nData);
 
   }
 
