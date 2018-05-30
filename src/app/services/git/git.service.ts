@@ -20,6 +20,7 @@ export class GitService {
       this.getNpipData();
     } catch (e) {
       // if there is an error we are at the end of the npip files
+
     }
   }
 
@@ -111,7 +112,7 @@ export class GitService {
 
     nData.name = this.buildName(this.npipCounter);
     nData.content = this.convertMediawikiToMarkdown(mediaWikiData);
-    this._dataService.npips.push(nData);
+    this._dataService.npips.unshift(nData);
 
   }
 

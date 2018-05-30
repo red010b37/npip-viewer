@@ -20,7 +20,7 @@ export class AppComponent {
 
 
   get npips(): NpipData[] {
-    return this._dataService.npips.reverse();
+    return this._dataService.npips;
   }
 
 
