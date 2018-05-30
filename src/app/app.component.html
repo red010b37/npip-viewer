@@ -1,9 +1,15 @@
 
+<mat-accordion>
+  <mat-expansion-panel *ngFor="let md of npips" >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Personal data
+      </mat-panel-title>
+      <mat-panel-description>
+        Type your name and age
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <markdown [data]="md"></markdown>
+  </mat-expansion-panel>
 
-
-
-<div *ngFor="let md of npips">
-
-  <markdown [data]="md"></markdown>
-
-</div>
+</mat-accordion>
