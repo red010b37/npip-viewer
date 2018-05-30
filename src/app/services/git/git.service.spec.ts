@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { GitService } from './git.service';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {environment} from "../../environments/environment";
+import {environment} from "../../../environments/environment";
 
 describe('GitService', () => {
   beforeEach(() => {
